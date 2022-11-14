@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
         btnGoToActivity2.setOnClickListener(){
             startActivity(
                 Intent(this, MainActivity2::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 //.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY) //MainActivity2 не будет добавлена в бэкстек
             )
         }

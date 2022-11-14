@@ -21,8 +21,7 @@
         <activity
             android:name=".MainActivity2"
             android:exported="true"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.KotlinApp.NoActionBar">
+            android:label="@string/title_activity_main2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
