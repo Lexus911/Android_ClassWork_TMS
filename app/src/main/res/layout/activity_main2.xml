@@ -10,11 +10,27 @@
         android:id="@+id/btnGoToActivity3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GO to activity 3"
+        android:text="@string/go_to_activity_3"
+        style="@style/MyButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Show Must Go On"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/teal_700"
+        app:layout_constraintBottom_toTopOf="@+id/btnGoToActivity3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.771" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

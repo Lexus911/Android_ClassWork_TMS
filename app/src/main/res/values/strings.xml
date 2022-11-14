@@ -9,4 +9,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="go_to_activity_2">GO to activity 2</string>
+    <string name="click_me">click me</string>
+    <string name="Queen">Show must go on</string>
+    <string name="from_MainActivity">\" from MainActivity\"</string>
+    <string name="no_data">no data</string>
+    <string name="blue">#2053fa</string>
+    <string name="go_to_activity_3">GO to activity 3</string>
+    <string name="close_the_app">Close the app</string>
+    <string name="go_ti">Go to previous activity</string>
 </resources>
