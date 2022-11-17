@@ -5,6 +5,6 @@
     android:title = "@string/close_the_app"/>
 <item
     android:id = "@+id/goBlack"
-    android:title = "@string/go_ti"/>
+    android:title = "@string/go_to_previous"/>
 
 </menu>

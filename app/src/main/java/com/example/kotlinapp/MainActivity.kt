@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor(getString(R.string.blue))))
-        supportActionBar?.title = "Add contact"
+        supportActionBar?.title = getString(R.string.add_contact)
 
         val btnGoToActivity2 = findViewById<Button>(R.id.btnGoToActivity2)
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val btn = findViewById<Button>(R.id.btn)
 
         btn.setOnClickListener{
-            textView.text = getString(R.string.Queen)
+            textView.text = getString(R.string.queen)
 
             startMainActivity2(this, textView.text.toString() + getString(R.string.from_MainActivity))
 

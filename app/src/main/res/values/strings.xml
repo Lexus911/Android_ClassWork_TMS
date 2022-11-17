@@ -11,11 +11,18 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="go_to_activity_2">GO to activity 2</string>
     <string name="click_me">click me</string>
-    <string name="Queen">Show must go on</string>
+    <string name="queen">Show must go on</string>
     <string name="from_MainActivity">\" from MainActivity\"</string>
     <string name="no_data">no data</string>
     <string name="blue">#2053fa</string>
     <string name="go_to_activity_3">GO to activity 3</string>
     <string name="close_the_app">Close the app</string>
-    <string name="go_ti">Go to previous activity</string>
+    <string name="go_to_previous">Go to previous activity</string>
+    <string name="add_contact">Add contact</string>
+    <string name="display_text">display text</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="go_to_activity_1">GO to activity 1</string>
+    <string name="truee">True</string>
+    <string name="falsee">False</string>
 </resources>

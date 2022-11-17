@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Котлин приложение</string>
+    <string name="title_activity_main2">МояАктивити2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Первый фрагмент</string>
+    <string name="second_fragment_label">Второй фрагмент</string>
+    <string name="next">Дальше</string>
+    <string name="previous">Назад</string>
+    <string name="hello_first_fragment">Привет первый фрагемент</string>
+    <string name="hello_second_fragment">Привет второй фрагмент Arg: %1$s</string>
+    <string name="go_to_activity_2">К активити 2</string>
+    <string name="click_me">нажми меня</string>
+    <string name="queen">Шоу будет продолжаться</string>
+    <string name="from_MainActivity">\" из МоейАктивити\"</string>
+    <string name="no_data">нет данных</string>
+    <string name="blue">#2053fa</string>
+    <string name="go_to_activity_3">К актвити 3</string>
+    <string name="close_the_app">Закрыть приложение</string>
+    <string name="go_to_previous">К предыдущей активити</string>
+    <string name="add_contact">Добавить контакт</string>
+</resources>
