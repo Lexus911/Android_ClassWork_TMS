@@ -75,7 +75,6 @@ class MainActivity3 : AppCompatActivity() {
 
                 }else if(editText2.text.toString().isEmpty()){
                 layout2.setErrorIconDrawable(R.drawable.ic_warning)
-
                 editText2.error = "password cant be empty"
                 }
             else textView.text = "${editText.text.toString()} ${editText2.text.toString()}"
