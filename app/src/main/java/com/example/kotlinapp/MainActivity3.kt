@@ -1,28 +1,27 @@
 package com.example.kotlinapp
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.kotlinapp.KotlinActivity.Companion.kotlinActivityStart
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity3 : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val btn = findViewById<Button>(R.id.btnGoToActivity1)
         btn.setOnClickListener{
-            startActivity(Intent(this,MainActivity::class.java))
+            kotlinActivityStart(this)
         }
 
         val editText = findViewById<TextInputEditText>(R.id.et_text)
@@ -77,7 +76,12 @@ class MainActivity3 : AppCompatActivity() {
                 layout2.setErrorIconDrawable(R.drawable.ic_warning)
                 editText2.error = "password cant be empty"
                 }
-            else textView.text = "${editText.text.toString()} ${editText2.text.toString()}"
+            else {
+                textView.text = "${editText.text.toString()} ${editText2.text.toString()}"
+
+
+            }
+
         }
 
 
