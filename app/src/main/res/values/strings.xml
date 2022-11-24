@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KotlinApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dragon_fruit">Dragon fruit</string>
+    <string name="you_are_in_details_fragment">YOU ARE IN DETAILS FRAGMENT</string>
+    <string name="finish">finish</string>
+    <string name="on_boarding">ON BOARDING</string>
 </resources>
