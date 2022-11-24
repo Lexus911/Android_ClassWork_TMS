@@ -19,9 +19,6 @@
         android:layout_height="300dp"
         android:text="Hell"/>
 
-
-
-
     <Button
         android:id="@+id/btn6"
         android:layout_width="100dp"
