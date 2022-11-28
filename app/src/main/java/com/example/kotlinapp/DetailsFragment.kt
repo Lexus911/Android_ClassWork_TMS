@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 
 
 class DetailsFragment : Fragment() {
@@ -18,6 +20,20 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
 
+        val detailsName = view.findViewById<TextView>(R.id.detailsName)
+        val detailsDate = view.findViewById<TextView>(R.id.detailsDate)
+        val detailsImage = view.findViewById<ImageView>(R.id.detailsImage)
+
+        val bundle = arguments
+        bundle?.let {safeBundle ->
+            val name = bundle.getString("name")
+            val date = bundle.getString("date")
+            val image = bundle.getInt("imageView")
+
+            detailsName.text = name
+            detailsDate.text = date
+            detailsImage.setBackgroundResource(image)
+        }
+    }
 }
