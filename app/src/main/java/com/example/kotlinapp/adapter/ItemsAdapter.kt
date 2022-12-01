@@ -9,9 +9,9 @@ import com.example.kotlinapp.model.ItemsModel
 
 class ItemsAdapter(private var itemsListener: ItemsListener):RecyclerView.Adapter<ItemsViewHolder>() {
 
-    private var listItems = mutableListOf<ItemsModel>() // создание листа
+    private var listItems = listOf<ItemsModel>() // создание листа
 
-    fun submitList(list: MutableList<ItemsModel>){ // инициалзация листа через сеттер
+    fun submitList(list: List<ItemsModel>){ // инициалзация листа через сеттер
         this.listItems = list
     }
 
