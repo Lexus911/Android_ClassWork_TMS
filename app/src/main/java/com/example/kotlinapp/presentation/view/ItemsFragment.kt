@@ -1,4 +1,4 @@
-package com.example.kotlinapp
+package com.example.kotlinapp.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,11 +8,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlinapp.adapter.ItemsAdapter
-import com.example.kotlinapp.listener.ItemsListener
+import com.example.kotlinapp.utils.BundleConstants
+import com.example.kotlinapp.R
+import com.example.kotlinapp.data.ItemsRepositoryImpl
+import com.example.kotlinapp.databinding.FragmentItemsBinding
+import com.example.kotlinapp.databinding.FragmentOnBoardingBinding
+import com.example.kotlinapp.domain.ItemsInteractor
+import com.example.kotlinapp.presentation.adapter.ItemsAdapter
+import com.example.kotlinapp.presentation.adapter.listener.ItemsListener
 import com.example.kotlinapp.model.ItemsModel
-import com.example.kotlinapp.mvp.ItemsPresenter
-import com.example.kotlinapp.mvp.ItemsView
+import com.example.kotlinapp.presentation.ItemsPresenter
+import com.example.kotlinapp.presentation.ItemsView
 
 // должна быть private, поэтому лучше в класс размещать или в компаньон обЪект, если надо использовать в другом фрагменте
 //const val NAME = "name"
@@ -20,6 +26,8 @@ import com.example.kotlinapp.mvp.ItemsView
 const val DETAILS = "Details"
 
 class ItemsFragment : Fragment(), ItemsListener, ItemsView {
+    private var _viewBinding: FragmentItemsBinding? = null
+    private val viewBinding get() = _viewBinding!!
 
     private lateinit var itemsAdapter: ItemsAdapter
 
@@ -28,19 +36,18 @@ class ItemsFragment : Fragment(), ItemsListener, ItemsView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_items, container, false)
+    ): View {
+        _viewBinding = FragmentItemsBinding.inflate(inflater)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemsPresenter = ItemsPresenter(this)
+        itemsPresenter = ItemsPresenter(this, ItemsInteractor(ItemsRepositoryImpl()))
 
         itemsAdapter = ItemsAdapter(this)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = itemsAdapter
+        viewBinding.recyclerView.adapter = itemsAdapter
 
         itemsPresenter.getData()
 

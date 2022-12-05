@@ -1,4 +1,4 @@
-package com.example.kotlinapp.mvp
+package com.example.kotlinapp.presentation
 
 import com.example.kotlinapp.model.ItemsModel
 

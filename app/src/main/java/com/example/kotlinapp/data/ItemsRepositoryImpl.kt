@@ -1,11 +1,11 @@
-package com.example.kotlinapp.mvp
+package com.example.kotlinapp.data
 
 import com.example.kotlinapp.R
+import com.example.kotlinapp.domain.ItemsRepository
 import com.example.kotlinapp.model.ItemsModel
 
-class ItemsPresenter(private val itemsView: ItemsView) {
-
-    fun getData(){
+class ItemsRepositoryImpl: ItemsRepository {
+    override fun getData(): List<ItemsModel> {
         val listItems = listOf<ItemsModel>(
             ItemsModel(R.drawable.dragon_fruit_max, "Android", "04.11.2023"),
             ItemsModel(R.drawable.blue_banana, "IOS", "05.10.2023"),
@@ -19,14 +19,7 @@ class ItemsPresenter(private val itemsView: ItemsView) {
             ItemsModel(R.drawable.avokado, "IOS", "13.02.2023"),
             ItemsModel(R.drawable.dragon_fruit_max, "Android", "14.01.2023")
         )
-        itemsView.dataReceived(listItems)
+        return listItems
     }
 
-    fun imageViewClicked(){
-        itemsView.imageViewClicked(R.string.imageview_clicked)
-    }
-
-    fun elementSelected(name: String, date: String, imageView: Int){
-        itemsView.goToDetails(name, date, imageView)
-    }
 }
