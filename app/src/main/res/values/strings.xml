@@ -7,4 +7,5 @@
     <string name="finish">finish</string>
     <string name="on_boarding">ON BOARDING</string>
     <string name="_26_02_2022">26.02.2022</string>
+    <string name="imageview_clicked">ImageViewClicked</string>
 </resources>

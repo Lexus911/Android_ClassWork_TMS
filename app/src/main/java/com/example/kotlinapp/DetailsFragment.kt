@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.kotlinapp.BundleConstants.IMAGE_VIEW
+import com.example.kotlinapp.ItemsFragment.Companion.NAME
 
 
 class DetailsFragment : Fragment() {
@@ -27,9 +29,9 @@ class DetailsFragment : Fragment() {
 
         val bundle = arguments
         bundle?.let {safeBundle ->
-            val name = bundle.getString("name")
-            val date = bundle.getString("date")
-            val image = bundle.getInt("imageView")
+            val name = bundle.getString(NAME)
+            val date = bundle.getString(ItemsFragment.Companion.DATE)
+            val image = bundle.getInt(IMAGE_VIEW)
 
             detailsName.text = name
             detailsDate.text = date

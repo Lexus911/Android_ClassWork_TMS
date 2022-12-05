@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinapp.adapter.ItemsAdapter
 import com.example.kotlinapp.listener.ItemsListener
 
+// должна быть private, поэтому лучше в класс размещать или в компаньон обЪект, если надо использовать в другом фрагменте
+//const val NAME = "name"
+
+const val DETAILS = "Details"
 
 class ItemsFragment : Fragment(), ItemsListener {
 
@@ -39,26 +43,31 @@ class ItemsFragment : Fragment(), ItemsListener {
             itemsAdapter.submitList(listItems)
         }
 
-        viewModel.msg.observe(viewLifecycleOwner){msg ->
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        viewModel.msg.observe(viewLifecycleOwner){ msg ->
+            Toast.makeText(context, getString(msg), Toast.LENGTH_SHORT).show()
         }
 
         viewModel.bundle.observe(viewLifecycleOwner){ navBundle ->
+
+            if(navBundle != null){
             val detailsFragment = DetailsFragment()
             val bundle = Bundle()
-            bundle.putString("name", navBundle.name)
-            bundle.putString("date", navBundle.date)
-            bundle.putInt("imageView", navBundle.image)
+            bundle.putString(NAME, navBundle.name)
+            bundle.putString(DATE, navBundle.date)
+            bundle.putInt(BundleConstants.IMAGE_VIEW, navBundle.image)
             detailsFragment.arguments = bundle
 
-            //.ADD мы не используем больше, используем .replce + .addToBackStack
+            //.ADD мы не используем больше, используем .replace + .addToBackStack
             parentFragmentManager
                 .beginTransaction()
                 .replace(R.id.activity_container, detailsFragment)
-                .addToBackStack("Details")
+                .addToBackStack(DETAILS)
                 .commit()
+
+            viewModel.userNavigated() // в конце навигации говрим вьюмодели что действие выполнено
         }
     }
+}
 
     override fun onClick() {
 
@@ -69,4 +78,13 @@ class ItemsFragment : Fragment(), ItemsListener {
 
         viewModel.elementClicked(name,  date, imageView)
     }
+
+
+    //мы можем это использовать, потому что мы видим откуда берётся константа
+    companion object {
+        const val DATE = "date"
+        const val NAME = "name"
+    }
+
 }
+
