@@ -7,6 +7,10 @@ android {
     namespace 'com.example.kotlinapp'
     compileSdk 32
 
+    buildFeatures{
+        dataBinding = true
+    }
+
     defaultConfig {
         applicationId "com.example.kotlinapp"
         minSdk 21

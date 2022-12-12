@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinapp.utils.BundleConstants
-import com.example.kotlinapp.ItemsViewModel
 import com.example.kotlinapp.R
 import com.example.kotlinapp.presentation.adapter.ItemsAdapter
 import com.example.kotlinapp.data.ItemsRepositoryImpl
