@@ -30,7 +30,6 @@ class ItemsFragment : Fragment(), ItemsListener, ItemsView {
     private val viewBinding get() = _viewBinding!!
 
     private lateinit var itemsAdapter: ItemsAdapter
-
     private lateinit var itemsPresenter: ItemsPresenter
 
     override fun onCreateView(

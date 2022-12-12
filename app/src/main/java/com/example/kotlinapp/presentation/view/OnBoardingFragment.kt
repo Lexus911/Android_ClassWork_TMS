@@ -26,8 +26,6 @@ class OnBoardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val onBoardingFinish = view.findViewById<Button>(R.id.btnFinish)
-
         viewBinding.btnFinish.setOnClickListener(){
             parentFragmentManager
                 .beginTransaction()

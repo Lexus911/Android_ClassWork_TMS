@@ -47,8 +47,6 @@ class ItemsViewModel: ViewModel() {
     fun userNavigated(){
         _bundle.value = null
     }
-
-
 }
 
 data class NavigateWithBundle(

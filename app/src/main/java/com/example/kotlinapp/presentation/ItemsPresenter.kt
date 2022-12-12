@@ -7,8 +7,6 @@ import com.example.kotlinapp.model.ItemsModel
 class ItemsPresenter(private val itemsView: ItemsView,
                      private val itemsInteractor: ItemsInteractor) {
 
-
-
     fun getData(){
         val listItems = itemsInteractor.getData()
         itemsView.dataReceived(listItems)
