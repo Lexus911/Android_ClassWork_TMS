@@ -1,4 +1,4 @@
-package com.example.kotlinapp
+package com.example.kotlinapp.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlinapp.adapter.ItemsAdapter
-import com.example.kotlinapp.listener.ItemsListener
+import com.example.kotlinapp.utils.BundleConstants
+import com.example.kotlinapp.ItemsViewModel
+import com.example.kotlinapp.R
+import com.example.kotlinapp.presentation.adapter.ItemsAdapter
+import com.example.kotlinapp.data.ItemsRepositoryImpl
+import com.example.kotlinapp.domain.ItemsInteractor
+import com.example.kotlinapp.presentation.adapter.listener.ItemsListener
+import com.example.kotlinapp.presentation.ItemsViewModelFactory
 
 // должна быть private, поэтому лучше в класс размещать или в компаньон обЪект, если надо использовать в другом фрагменте
 //const val NAME = "name"
@@ -20,7 +26,7 @@ const val DETAILS = "Details"
 class ItemsFragment : Fragment(), ItemsListener {
 
     private lateinit var itemsAdapter: ItemsAdapter
-    private val viewModel: ItemsViewModel by viewModels()
+    private val viewModel: ItemsViewModel by viewModels{ ItemsViewModelFactory(ItemsInteractor(ItemsRepositoryImpl())) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

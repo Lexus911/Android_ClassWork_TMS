@@ -1,10 +1,10 @@
-package com.example.kotlinapp.adapter
+package com.example.kotlinapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinapp.R
-import com.example.kotlinapp.listener.ItemsListener
+import com.example.kotlinapp.presentation.adapter.listener.ItemsListener
 import com.example.kotlinapp.model.ItemsModel
 
 class ItemsAdapter(private var itemsListener: ItemsListener):RecyclerView.Adapter<ItemsViewHolder>() {

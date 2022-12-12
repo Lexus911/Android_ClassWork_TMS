@@ -1,4 +1,4 @@
-package com.example.kotlinapp
+package com.example.kotlinapp.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.kotlinapp.BundleConstants.IMAGE_VIEW
-import com.example.kotlinapp.ItemsFragment.Companion.NAME
+import com.example.kotlinapp.utils.BundleConstants.IMAGE_VIEW
+import com.example.kotlinapp.presentation.view.ItemsFragment.Companion.NAME
+import com.example.kotlinapp.R
 
 
 class DetailsFragment : Fragment() {
@@ -30,7 +31,7 @@ class DetailsFragment : Fragment() {
         val bundle = arguments
         bundle?.let {safeBundle ->
             val name = bundle.getString(NAME)
-            val date = bundle.getString(ItemsFragment.Companion.DATE)
+            val date = bundle.getString(ItemsFragment.DATE)
             val image = bundle.getInt(IMAGE_VIEW)
 
             detailsName.text = name
