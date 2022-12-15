@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModel
 import com.example.kotlinapp.R
 import com.example.kotlinapp.domain.ItemsInteractor
 import com.example.kotlinapp.model.ItemsModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ItemsViewModel(
+@HiltViewModel
+class ItemsViewModel @Inject constructor(
     private val itemsInteractor: ItemsInteractor
 ): ViewModel() {
 

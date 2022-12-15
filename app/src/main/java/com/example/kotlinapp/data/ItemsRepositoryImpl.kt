@@ -3,9 +3,11 @@ package com.example.kotlinapp.data
 import com.example.kotlinapp.R
 import com.example.kotlinapp.domain.ItemsRepository
 import com.example.kotlinapp.model.ItemsModel
+import javax.inject.Inject
 
 
-class ItemsRepositoryImpl: ItemsRepository {
+class ItemsRepositoryImpl @Inject constructor(): ItemsRepository {
+
     override fun getData(): List<ItemsModel> {
         return listOf<ItemsModel>(
             ItemsModel(R.drawable.dragon_fruit_max, "Android", "04.11.2023"),
