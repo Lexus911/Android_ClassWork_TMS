@@ -33,7 +33,7 @@ class OnBoardingFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
 
-            viewModel.nav.observe(viewLifecycleOwner){
+        viewModel.nav.observe(viewLifecycleOwner){
                 if(it!=null) {
                     parentFragmentManager
                         .beginTransaction()

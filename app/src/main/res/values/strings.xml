@@ -8,4 +8,10 @@
     <string name="on_boarding">ON BOARDING</string>
     <string name="_26_02_2022">26.02.2022</string>
     <string name="imageview_clicked">ImageViewClicked</string>
+    <string name="login">Login</string>
+    <string name="password">password</string>
+    <string name="username">username</string>
+    <string name="welcome_to_he">Welcome to He....</string>
+    <string name="show_creds">Show Creds</string>
+    <string name="to_on_boarding">To on Boarding</string>
 </resources>
