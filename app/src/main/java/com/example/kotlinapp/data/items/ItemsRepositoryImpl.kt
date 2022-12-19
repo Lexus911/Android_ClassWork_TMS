@@ -1,7 +1,7 @@
-package com.example.kotlinapp.data
+package com.example.kotlinapp.data.items
 
 import com.example.kotlinapp.R
-import com.example.kotlinapp.domain.ItemsRepository
+import com.example.kotlinapp.domain.items.ItemsRepository
 import com.example.kotlinapp.model.ItemsModel
 import javax.inject.Inject
 

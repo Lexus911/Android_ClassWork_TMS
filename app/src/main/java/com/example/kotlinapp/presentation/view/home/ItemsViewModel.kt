@@ -1,11 +1,11 @@
-package com.example.kotlinapp.presentation.view
+package com.example.kotlinapp.presentation.view.home
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kotlinapp.R
-import com.example.kotlinapp.domain.ItemsInteractor
+import com.example.kotlinapp.domain.items.ItemsInteractor
 import com.example.kotlinapp.model.ItemsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

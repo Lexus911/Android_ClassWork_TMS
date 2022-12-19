@@ -1,28 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.kotlinapp.presentation.view.dataBinding.LoginViewModel" />
-        <variable
-            name="viewHandler"
-            type="com.example.kotlinapp.presentation.view.dataBinding.LoginFragment.ViewHandler" />
-    </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.view.dataBinding.LoginFragment">
+        tools:context=".presentation.view.auth.LoginFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "@={viewModel.userCreds}"
             android:gravity="center_horizontal"
 
             android:textColor="@color/black"
@@ -37,8 +27,8 @@
         </com.google.android.material.textview.MaterialTextView>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Login"
-            android:onClick="@{() -> viewModel.showCreds()}"
+            android:id="@+id/btn_show_creds"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/teal_700"
@@ -57,7 +47,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_goToOnBoarding"
-            android:onClick="@{() -> viewHandler.goToTheOnBoarding()}"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/teal_700"
@@ -88,7 +78,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_text2"
-                android:text="@={viewModel.userPassword}"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -127,7 +117,6 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_text"
-                android:text="@={viewModel.userName}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -141,5 +130,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</layout>
 

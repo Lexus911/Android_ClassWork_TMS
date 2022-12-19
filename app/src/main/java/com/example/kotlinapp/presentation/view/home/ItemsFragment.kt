@@ -1,4 +1,4 @@
-package com.example.kotlinapp.presentation.view
+package com.example.kotlinapp.presentation.view.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinapp.utils.BundleConstants
 import com.example.kotlinapp.R
 import com.example.kotlinapp.presentation.adapter.ItemsAdapter
-import com.example.kotlinapp.data.ItemsRepositoryImpl
-import com.example.kotlinapp.domain.ItemsInteractor
 import com.example.kotlinapp.presentation.adapter.listener.ItemsListener
-import com.example.kotlinapp.presentation.ItemsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 
 // должна быть private, поэтому лучше в класс размещать или в компаньон обЪект, если надо использовать в другом фрагменте

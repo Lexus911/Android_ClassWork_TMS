@@ -1,9 +1,9 @@
-package com.example.kotlinapp.presentation
+package com.example.kotlinapp.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.kotlinapp.presentation.view.ItemsViewModel
-import com.example.kotlinapp.domain.ItemsInteractor
+import com.example.kotlinapp.presentation.view.home.ItemsViewModel
+import com.example.kotlinapp.domain.items.ItemsInteractor
 
 class ItemsViewModelFactory(
     private val itemsInteractor: ItemsInteractor

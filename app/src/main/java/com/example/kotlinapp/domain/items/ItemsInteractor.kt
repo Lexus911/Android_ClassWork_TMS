@@ -1,4 +1,4 @@
-package com.example.kotlinapp.domain
+package com.example.kotlinapp.domain.items
 
 import com.example.kotlinapp.model.ItemsModel
 import javax.inject.Inject

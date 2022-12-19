@@ -1,4 +1,4 @@
-package com.example.kotlinapp.presentation.view
+package com.example.kotlinapp.presentation.view.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
