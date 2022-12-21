@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.FragmentHomeBinding
-import com.example.kotlinapp.databinding.FragmentLoginBinding
 import com.example.kotlinapp.presentation.view.auth.OnBoardingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +39,7 @@ class HomeFragment : Fragment(){
         }
 
         viewModel.userCreds.observe(viewLifecycleOwner){
-            binding.tvUserCreds.text = "${it.userName} \n ${it.userPassword}"
+            binding.tvUserCreds.text = "${it.userName} \n${it.userPassword}"
         }
 
 

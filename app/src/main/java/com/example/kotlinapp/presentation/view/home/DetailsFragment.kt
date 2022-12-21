@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import com.example.kotlinapp.utils.BundleConstants.IMAGE_VIEW
 import com.example.kotlinapp.presentation.view.home.ItemsFragment.Companion.NAME
 import com.example.kotlinapp.R
-import com.example.kotlinapp.databinding.FragmentLoginBinding
+import com.example.kotlinapp.presentation.view.auth.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,13 +31,6 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btn = view.findViewById<Button>(R.id.btn_logout)
-        btn.setOnClickListener{
-            viewModel.logoutUser()
-        }
-
-        viewModel.nav.observe(viewLifecycleOwner){
-
         val detailsName = view.findViewById<TextView>(R.id.detailsName)
         val detailsDate = view.findViewById<TextView>(R.id.detailsDate)
         val detailsImage = view.findViewById<ImageView>(R.id.detailsImage)
@@ -51,10 +44,18 @@ class DetailsFragment : Fragment() {
             detailsName.text = name
             detailsDate.text = date
             detailsImage.setBackgroundResource(image)
-        }
+       }
+
+        val btn = view.findViewById<Button>(R.id.btn_logout)
+        btn.setOnClickListener{
+            viewModel.logoutUser()
         }
 
-
+        viewModel.nav.observe(viewLifecycleOwner){
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.activity_container, LoginFragment())
+                .commit()
+        }
 
 
 
