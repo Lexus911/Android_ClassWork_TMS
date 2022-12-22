@@ -14,7 +14,6 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _userCreds = MutableLiveData<UserModel>()
-
     val userCreds: LiveData<UserModel> = _userCreds
 
     fun showUserData(){
