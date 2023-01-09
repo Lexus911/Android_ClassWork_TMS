@@ -2,7 +2,6 @@ package com.example.kotlinapp.di
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import com.example.kotlinapp.data.auth.AuthRepositoryImpl
 import com.example.kotlinapp.data.items.ItemsRepositoryImpl
 import com.example.kotlinapp.data.sharedpref.SharedPreferencesHelper

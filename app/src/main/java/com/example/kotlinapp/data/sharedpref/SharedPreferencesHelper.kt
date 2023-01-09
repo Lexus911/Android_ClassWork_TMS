@@ -6,11 +6,11 @@ import javax.inject.Inject
 
 class SharedPreferencesHelper @Inject constructor(private val sharedPreferences: SharedPreferences){
     fun saveUserName(name: String?){
-        sharedPreferences.edit().putString("USER_NAME", name).apply()
+        sharedPreferences.edit().putString(USER_NAME, name).apply()
     }
 
     fun saveUserPassword(password: String?){
-        sharedPreferences.edit().putString("USER_PASSWORD", password).apply()
+        sharedPreferences.edit().putString(USER_PASSWORD, password).apply()
     }
 
     fun getUserCreds(): UserModel{
