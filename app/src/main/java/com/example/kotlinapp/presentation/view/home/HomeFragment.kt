@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.FragmentHomeBinding
-import com.example.kotlinapp.presentation.view.auth.OnBoardingFragment
+import com.example.kotlinapp.utils.NavHelper.replaceGraph
 import com.example.kotlinapp.utils.coroutines.CoroutinesExample
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -70,10 +69,15 @@ class HomeFragment : Fragment(){
         viewModel.showUserData()
 
         binding.btnFinish.setOnClickListener {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.activity_container, OnBoardingFragment())
-                    .commit()
+            viewModel.toRecyclerView()
             }
+
+        viewModel.nav.observe(viewLifecycleOwner){
+            if(it != null) {
+                replaceGraph(it)
+            }
+        }
+
 
         viewModel.userCreds.observe(viewLifecycleOwner){
             binding.tvUserCreds.text = "${it.userName} \n${it.userPassword}"

@@ -13,12 +13,11 @@ import com.example.kotlinapp.utils.BundleConstants
 import com.example.kotlinapp.R
 import com.example.kotlinapp.presentation.adapter.ItemsAdapter
 import com.example.kotlinapp.presentation.adapter.listener.ItemsListener
+import com.example.kotlinapp.utils.NavHelper.navigateWithBundle
 import dagger.hilt.android.AndroidEntryPoint
 
 // должна быть private, поэтому лучше в класс размещать или в компаньон обЪект, если надо использовать в другом фрагменте
 //const val NAME = "name"
-
-const val DETAILS = "Details"
 
 @AndroidEntryPoint
 class ItemsFragment : Fragment(), ItemsListener {
@@ -54,19 +53,12 @@ class ItemsFragment : Fragment(), ItemsListener {
         viewModel.bundle.observe(viewLifecycleOwner){ navBundle ->
 
             if(navBundle != null){
-            val detailsFragment = DetailsFragment()
             val bundle = Bundle()
             bundle.putString(NAME, navBundle.name)
             bundle.putString(DATE, navBundle.date)
             bundle.putInt(BundleConstants.IMAGE_VIEW, navBundle.image)
-            detailsFragment.arguments = bundle
 
-            //.ADD мы не используем больше, используем .replace + .addToBackStack
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.activity_container, detailsFragment)
-                .addToBackStack(DETAILS)
-                .commit()
+                navigateWithBundle(navBundle.destinationId, bundle)
 
             viewModel.userNavigated() // в конце навигации говрим вьюмодели что действие выполнено
         }

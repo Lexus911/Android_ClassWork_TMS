@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.FragmentLoginBinding
-import com.example.kotlinapp.presentation.view.home.HomeFragment
+import com.example.kotlinapp.utils.NavHelper.navigate
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,9 +35,10 @@ class LoginFragment : Fragment() {
         )
     }
         viewModel.nav.observe(viewLifecycleOwner){
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.activity_container, HomeFragment())
-                .commit()
+            if(it != null){
+                navigate(it)
+            viewModel.userNavigated()
+        }
         }
     }
 }

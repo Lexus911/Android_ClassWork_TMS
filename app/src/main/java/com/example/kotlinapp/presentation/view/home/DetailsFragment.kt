@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import com.example.kotlinapp.utils.BundleConstants.IMAGE_VIEW
 import com.example.kotlinapp.presentation.view.home.ItemsFragment.Companion.NAME
 import com.example.kotlinapp.R
-import com.example.kotlinapp.presentation.view.auth.LoginFragment
+import com.example.kotlinapp.utils.NavHelper.replaceGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,9 +52,9 @@ class DetailsFragment : Fragment() {
         }
 
         viewModel.nav.observe(viewLifecycleOwner){
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.activity_container, LoginFragment())
-                .commit()
+            if(it!=null) {
+                replaceGraph(it)
+            }
         }
 
 

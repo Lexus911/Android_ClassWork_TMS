@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.FragmentOnBoardingBinding
-import com.example.kotlinapp.presentation.view.home.ItemsFragment
+import com.example.kotlinapp.utils.NavHelper.navigateWithDeletedBackStack
 
 
 class OnBoardingFragment : Fragment() {
@@ -35,10 +34,7 @@ class OnBoardingFragment : Fragment() {
 
         viewModel.nav.observe(viewLifecycleOwner){
                 if(it!=null) {
-                    parentFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.activity_container, ItemsFragment())
-                        .commit()
+                    navigateWithDeletedBackStack(it.destinationId, it.removeFragmentId)
                     viewModel.finishPerformed()
                 }
             }
