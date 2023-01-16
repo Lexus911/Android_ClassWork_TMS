@@ -14,4 +14,7 @@
     <string name="welcome_to_he">Welcome to He....</string>
     <string name="show_creds">Show Creds</string>
     <string name="to_on_boarding">To on Boarding</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="items_fragment">Items Fragment</string>
+    <string name="show_on_boarding">On Boarding</string>
 </resources>

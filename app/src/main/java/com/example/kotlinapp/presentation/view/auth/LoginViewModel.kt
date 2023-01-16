@@ -24,7 +24,6 @@ class LoginViewModel @Inject constructor(private val authInteractor: AuthInterac
 //            _nav.postValue(Unit)  //используем метод postValue для работы не на Main потоке, т.к LiveData работает только на Main-потоке
 //        }
 
-
 //        viewModelScope.launch(Dispatchers.Main) {
 //            val job = launch {
 //                authInteractor.loginUser(userName, userPassword)
