@@ -8,13 +8,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.ActivityMainBinding
 import com.example.kotlinapp.presentation.view.home.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
@@ -44,12 +43,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         binding.bottomNavigation.setupWithNavController(navController)
 
-        val btnav = AppBarConfiguration(
-            setOf(R.id.onBoardingFragment2, R.id.itemsFragment)
-        )
-
-        NavigationUI.setupActionBarWithNavController(this, navController, btnav)
-
         viewModel.visibility.observe(this) {
             binding.bottomNavigation.visibility = it
         }
@@ -61,11 +54,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 R.navigation.auth_graph
             )
 
-        val random = (1..5).random()
-        if (random == 1 || random == 2 || random == 3) {
-            navGraph.startDestination = R.id.loginFragment
-        } else {
+        val random = Random().nextInt(5-1)
+        if (random == 1 || random == 2) {
             navGraph.startDestination = R.id.homeFragment
+        } else {
+            navGraph.startDestination = R.id.loginFragment
         }
         return navGraph
     }
