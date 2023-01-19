@@ -50,13 +50,17 @@ class ItemsFragment : Fragment(), ItemsListener {
             Toast.makeText(context, getString(msg), Toast.LENGTH_SHORT).show()
         }
 
+        viewModel.error.observe(viewLifecycleOwner){
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
+
         viewModel.bundle.observe(viewLifecycleOwner){ navBundle ->
 
             if(navBundle != null){
             val bundle = Bundle()
-            bundle.putString(NAME, navBundle.name)
-            bundle.putString(DATE, navBundle.date)
-            bundle.putInt(BundleConstants.IMAGE_VIEW, navBundle.image)
+
+            bundle.putString(DESCRIPTION, navBundle.description)
+            bundle.putString(BundleConstants.IMAGE_VIEW, navBundle.image)
 
                 navigateWithBundle(navBundle.destinationId, bundle)
 
@@ -70,16 +74,15 @@ class ItemsFragment : Fragment(), ItemsListener {
         viewModel.imageViewCLicked()
     }
 
-    override fun onElementSelected(name: String, date: String, imageView: Int) {
+    override fun onElementSelected(description: String, image: String) {
 
-        viewModel.elementClicked(name,  date, imageView)
+        viewModel.elementClicked(description, image)
     }
 
 
     //мы можем это использовать, потому что мы видим откуда берётся константа
     companion object {
-        const val DATE = "date"
-        const val NAME = "name"
+        const val DESCRIPTION = "description"
     }
 
 }
