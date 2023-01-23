@@ -79,6 +79,10 @@ class ItemsFragment : Fragment(), ItemsListener {
         viewModel.elementClicked(description, image)
     }
 
+    override fun onDeleteClicked(description: String) {
+        viewModel.deleteItem(description)
+    }
+
 
     //мы можем это использовать, потому что мы видим откуда берётся константа
     companion object {

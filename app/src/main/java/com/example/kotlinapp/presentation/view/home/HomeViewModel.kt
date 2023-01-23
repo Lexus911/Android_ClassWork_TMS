@@ -33,4 +33,6 @@ class HomeViewModel @Inject constructor(
     fun toRecyclerView(){
         _nav.value = R.navigation.main_graph
     }
+
+
 }
