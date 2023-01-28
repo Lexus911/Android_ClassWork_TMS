@@ -2,11 +2,13 @@ package com.example.kotlinapp.data.items
 
 
 import android.util.Log
+import com.example.kotlinapp.data.database.FavoritesEntity
 import com.example.kotlinapp.data.database.ItemsEntity
 import com.example.kotlinapp.data.database.dao.ItemsDAO
 import com.example.kotlinapp.data.service.ApiService
 import com.example.kotlinapp.data.service.ApiServiceSecond
 import com.example.kotlinapp.domain.items.ItemsRepository
+import com.example.kotlinapp.model.FavoritesModel
 import com.example.kotlinapp.model.ItemsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,8 +30,10 @@ class ItemsRepositoryImpl @Inject constructor(
         return withContext(Dispatchers.IO) {
 
             if(!itemsDAO.doesItemsEntityExist()){
-                Log.w("getData", "data not exist")
+
                 val response = apiService.getData()
+                Log.w("Data", response.body()?.sampleList.toString())
+
                 response.body()?.sampleList?.let {
                     it.map {
                         val itemsEntity =
@@ -56,10 +60,30 @@ class ItemsRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun findItemByDescription(searchText: String): ItemsModel {
+        return withContext(Dispatchers.IO) {
+            val itemsEntity = itemsDAO.findItemEntityByDescription(searchText)
+            ItemsModel(itemsEntity.description, itemsEntity.imageUrl)
+        }
+    }
 
-//    override suspend fun findItemByDescription(searchText: String): ItemsModel {
-//        return withContext(Dispatchers.IO) {
-//            val itemsEntity = itemsDAO.findItemEntityByDescription(searchText)
-//        }
-//    }
+    override suspend fun favClicked(itemsModel: ItemsModel) {
+        return withContext(Dispatchers.IO) {
+            itemsDAO.insertFavoritesEntity(
+                FavoritesEntity(
+                Random().nextInt(),
+                itemsModel.description,
+                itemsModel.image)
+            )
+        }
+    }
+
+    override suspend fun getFavorites(): List<FavoritesModel> {
+        return withContext(Dispatchers.IO) {
+            val favoritesEntity = itemsDAO.getFavoritesEntities()
+            favoritesEntity.map{
+                FavoritesModel(it.description, it.imageUrl)
+            }
+        }
+    }
 }

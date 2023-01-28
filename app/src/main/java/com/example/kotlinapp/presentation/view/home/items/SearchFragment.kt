@@ -1,4 +1,4 @@
-package com.example.kotlinapp.presentation.view.home
+package com.example.kotlinapp.presentation.view.home.items
 
 import android.net.Uri
 import android.os.Bundle
@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.kotlinapp.databinding.FragmentSearchBinding
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null

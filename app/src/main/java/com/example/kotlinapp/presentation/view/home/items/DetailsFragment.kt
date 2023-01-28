@@ -1,4 +1,4 @@
-package com.example.kotlinapp.presentation.view.home
+package com.example.kotlinapp.presentation.view.home.items
 
 import android.net.Uri
 import android.os.Bundle

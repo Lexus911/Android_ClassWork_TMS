@@ -1,5 +1,6 @@
-package com.example.kotlinapp.presentation.view.home
+package com.example.kotlinapp.presentation.view.home.items
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,8 +21,13 @@ class SearchViewModel @Inject constructor(
 
     fun findItem(searchText: String){
         viewModelScope.launch {
-            val foundItem = itemsInteractor.findItem(searchText)
-            _item.value = foundItem
+            try {
+                val foundItem = itemsInteractor.findItem(searchText)
+                _item.value = foundItem
+            }catch (e: Exception){
+                Log.w("exception", e.toString())
+            }
+
         }
     }
 

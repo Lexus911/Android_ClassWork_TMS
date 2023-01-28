@@ -1,4 +1,4 @@
-package com.example.kotlinapp.presentation.view.home
+package com.example.kotlinapp.presentation.view.home.items
 
 
 import androidx.lifecycle.LiveData
@@ -59,6 +59,11 @@ class ItemsViewModel @Inject constructor(
             itemsInteractor.deleteItemByDescription(description)
         }
 }
+    fun onFavClicked(description: String){
+        viewModelScope.launch {
+            itemsInteractor.onFavClicked(description)
+        }
+    }
 }
 
 data class NavigateWithBundle(

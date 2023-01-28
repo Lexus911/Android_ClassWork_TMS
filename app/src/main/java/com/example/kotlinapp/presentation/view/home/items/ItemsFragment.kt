@@ -1,4 +1,4 @@
-package com.example.kotlinapp.presentation.view.home
+package com.example.kotlinapp.presentation.view.home.items
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -81,6 +81,10 @@ class ItemsFragment : Fragment(), ItemsListener {
 
     override fun onDeleteClicked(description: String) {
         viewModel.deleteItem(description)
+    }
+
+    override fun onFavClicked(description: String) {
+        viewModel.onFavClicked(description)
     }
 
 

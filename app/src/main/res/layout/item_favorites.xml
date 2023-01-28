@@ -28,7 +28,7 @@
             android:id="@+id/iv_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_delete_forever_24"
+            android:src="@drawable/ic_delete_favorites"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,17 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.523" />
 
-        <ImageView
-            android:id="@+id/btnFav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_fav_add"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.767"
-            app:layout_constraintStart_toEndOf="@+id/iv_name"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_name"

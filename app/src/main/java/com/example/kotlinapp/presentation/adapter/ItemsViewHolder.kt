@@ -18,6 +18,7 @@ class ItemsViewHolder(private val view: View,
         val description = view.findViewById<TextView>(R.id.tv_name)
         val imageView = view.findViewById<ImageView>(R.id.iv_name)
         val imageDelete = view.findViewById<ImageView>(R.id.iv_delete)
+        val favorites = view.findViewById<ImageView>(R.id.btnFav)
 
         description.text = itemsModel.description
 
@@ -36,6 +37,11 @@ class ItemsViewHolder(private val view: View,
         imageDelete.setOnClickListener{
             itemsListener.onDeleteClicked(itemsModel.description)
         }
+
+        favorites.setOnClickListener{
+            itemsListener.onFavClicked(itemsModel.description)
+        }
+
 
     }
 }

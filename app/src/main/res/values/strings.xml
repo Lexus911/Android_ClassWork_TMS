@@ -18,4 +18,5 @@
     <string name="items_fragment">Items Fragment</string>
     <string name="show_on_boarding">On Boarding</string>
     <string name="search_fragment">Search Fragment</string>
+    <string name="favorites">Favorites</string>
 </resources>

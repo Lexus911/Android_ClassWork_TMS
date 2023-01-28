@@ -1,4 +1,4 @@
-package com.example.kotlinapp.presentation.view.home
+package com.example.kotlinapp.presentation.view.home.items
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +14,7 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val authInteractor: AuthInteractor
 ): ViewModel() {
+
     private val _nav = MutableLiveData<Int?>()
     val nav: LiveData<Int?> = _nav
 
