@@ -9,6 +9,8 @@ import com.example.kotlinapp.R
 import com.example.kotlinapp.domain.items.ItemsInteractor
 import com.example.kotlinapp.model.ItemsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,8 +19,11 @@ class ItemsViewModel @Inject constructor(
     private val itemsInteractor: ItemsInteractor
 ): ViewModel() {
 
-    private val _items = MutableLiveData<List<ItemsModel>>()
-    val items: LiveData<List<ItemsModel>> = _items
+//    private val _items = MutableLiveData<List<ItemsModel>>()
+//    val items: LiveData<List<ItemsModel>> = _items
+
+    val items = flow<Flow<List<ItemsModel>>>{ emit(itemsInteractor.showData()) }
+
 
     private val _msg = MutableLiveData<Int>()
     val msg: LiveData<Int> = _msg
@@ -33,13 +38,21 @@ class ItemsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 itemsInteractor.getData()
-                val listItems = itemsInteractor.showData()
-                _items.value = listItems
             }catch (e: Exception){
-                _error.value = e.message.toString() //обычно передаётся просто строка
+                _error.value = e.message.toString()
             }
-
         }
+
+//        viewModelScope.launch {
+//            try {
+//                val listItems = itemsInteractor.showData()
+//                listItems.collect{
+//                    _items.value = it
+//                }
+//            }catch (e: Exception){
+//                _error.value = e.message.toString() //обычно передаётся просто строка
+//            }
+//        }
     }
 
     fun imageViewCLicked(){

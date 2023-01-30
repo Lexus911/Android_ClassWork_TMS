@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinapp.utils.BundleConstants
@@ -15,6 +16,8 @@ import com.example.kotlinapp.presentation.adapter.ItemsAdapter
 import com.example.kotlinapp.presentation.adapter.listener.ItemsListener
 import com.example.kotlinapp.utils.NavHelper.navigateWithBundle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 
 // должна быть private, поэтому лучше в класс размещать или в компаньон обЪект, если надо использовать в другом фрагменте
 //const val NAME = "name"
@@ -42,8 +45,19 @@ class ItemsFragment : Fragment(), ItemsListener {
 
         viewModel.getData()
 
-        viewModel.items.observe(viewLifecycleOwner){ listItems ->
-            itemsAdapter.submitList(listItems)
+//        viewModel.items.observe(viewLifecycleOwner){ listItems ->
+//            itemsAdapter.submitList(listItems)
+//        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.items.catch {
+                Toast.makeText(context, it.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+                .collect{ flowList ->
+                flowList.collect{ list ->
+                    itemsAdapter.submitList(list)
+                }
+            }
         }
 
         viewModel.msg.observe(viewLifecycleOwner){ msg ->

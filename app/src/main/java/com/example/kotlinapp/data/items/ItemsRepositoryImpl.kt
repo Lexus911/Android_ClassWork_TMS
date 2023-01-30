@@ -11,6 +11,8 @@ import com.example.kotlinapp.domain.items.ItemsRepository
 import com.example.kotlinapp.model.FavoritesModel
 import com.example.kotlinapp.model.ItemsModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
@@ -26,11 +28,9 @@ class ItemsRepositoryImpl @Inject constructor(
     ): ItemsRepository {
 
     override suspend fun getData() {
-
-        return withContext(Dispatchers.IO) {
-
-            if(!itemsDAO.doesItemsEntityExist()){
-
+         withContext(Dispatchers.IO) {
+            itemsDAO.doesItemsEntityExist().collect{
+            if(!it){
                 val response = apiService.getData()
                 Log.w("Data", response.body()?.sampleList.toString())
 
@@ -44,12 +44,15 @@ class ItemsRepositoryImpl @Inject constructor(
             }
         }
     }
+    }
 
-    override suspend fun showData(): List<ItemsModel> {
+    override suspend fun showData(): Flow<List<ItemsModel>> {
         return withContext(Dispatchers.IO) {
             val itemsEntity = itemsDAO.getItemsEntities()
-            itemsEntity.map{
-                ItemsModel(it.description, it.imageUrl)
+            itemsEntity.map{ itemsList ->  //мапим флоу, доставая лист
+                itemsList.map{ item -> //мапим сам лист уже
+                ItemsModel(item.description, item.imageUrl)
+                }
             }
         }
     }

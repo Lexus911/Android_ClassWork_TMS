@@ -51,4 +51,40 @@
 
     </androidx.appcompat.widget.AppCompatTextView>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/teal_700"
+        android:gravity="center_horizontal"
+        android:paddingVertical="10dp"
+        android:text="@string/start"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_stop"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/teal_700"
+        android:gravity="center_horizontal"
+        android:paddingVertical="10dp"
+        android:text="@string/stop"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

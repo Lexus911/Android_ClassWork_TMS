@@ -2,6 +2,7 @@ package com.example.kotlinapp.domain.items
 
 import com.example.kotlinapp.model.FavoritesModel
 import com.example.kotlinapp.model.ItemsModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ItemsInteractor @Inject constructor(private val itemsRepository: ItemsRepository) {
@@ -10,7 +11,7 @@ class ItemsInteractor @Inject constructor(private val itemsRepository: ItemsRepo
         return itemsRepository.getData()
     }
 
-    suspend fun showData(): List<ItemsModel>{
+    suspend fun showData(): Flow<List<ItemsModel>> {
         return itemsRepository.showData()
     }
 
