@@ -31,7 +31,11 @@
         android:id="@+id/searchFragment"
         android:name="com.example.kotlinapp.presentation.view.home.items.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_itemsFragment"
+            app:destination="@id/itemsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.kotlinapp.presentation.view.home.items.FavoritesFragment"

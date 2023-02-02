@@ -33,7 +33,6 @@ class ItemsRepositoryImpl @Inject constructor(
             if(!it){
                 val response = apiService.getData()
                 Log.w("Data", response.body()?.sampleList.toString())
-
                 response.body()?.sampleList?.let {
                     it.map {
                         val itemsEntity =

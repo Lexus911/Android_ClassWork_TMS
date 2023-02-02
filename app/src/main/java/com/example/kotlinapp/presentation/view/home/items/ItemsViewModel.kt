@@ -22,8 +22,14 @@ class ItemsViewModel @Inject constructor(
 //    private val _items = MutableLiveData<List<ItemsModel>>()
 //    val items: LiveData<List<ItemsModel>> = _items
 
+    private val _trigger = MutableLiveData<Flow<Unit>>()
+    val trigger: LiveData<Flow<Unit>> = _trigger
+
+
     val items = flow<Flow<List<ItemsModel>>>{ emit(itemsInteractor.showData()) }
 
+    //    1 способ
+//    val getData = flow{ emit(itemsInteractor.getData()) }
 
     private val _msg = MutableLiveData<Int>()
     val msg: LiveData<Int> = _msg
@@ -34,26 +40,34 @@ class ItemsViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun getData() {
-        viewModelScope.launch {
-            try {
-                itemsInteractor.getData()
-            }catch (e: Exception){
-                _error.value = e.message.toString()
-            }
-        }
-
+//    fun getData() {
 //        viewModelScope.launch {
 //            try {
-//                val listItems = itemsInteractor.showData()
-//                listItems.collect{
-//                    _items.value = it
-//                }
+//                itemsInteractor.getData()
 //            }catch (e: Exception){
-//                _error.value = e.message.toString() //обычно передаётся просто строка
+//                _error.value = e.message.toString()
 //            }
 //        }
-    }
+//
+//
+////        viewModelScope.launch {
+////            try {
+////                val listItems = itemsInteractor.showData()
+////                listItems.collect{
+////                    _items.value = it
+////                }
+////            }catch (e: Exception){
+////                _error.value = e.message.toString() //обычно передаётся просто строка
+////            }
+////        }
+//    }
+
+        //2 способ
+//    fun getData(){
+//        viewModelScope.launch {
+//            _trigger.value = flow{ emit(itemsInteractor.getData()) }
+//        }
+//    }
 
     fun imageViewCLicked(){
         _msg.value = R.string.imageview_clicked
@@ -65,6 +79,11 @@ class ItemsViewModel @Inject constructor(
 
     fun userNavigated(){
         _bundle.value = null
+    }
+
+//    3 способ
+    suspend fun getDataSimple(){
+        itemsInteractor.getData()
     }
 
     fun deleteItem(description: String){
