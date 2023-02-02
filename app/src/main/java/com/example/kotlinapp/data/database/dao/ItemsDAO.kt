@@ -16,7 +16,7 @@ interface ItemsDAO {
     fun insertItemsEntity(itemsEntity: ItemsEntity)
 
     @Query("SELECT(SELECT COUNT(*) From ItemsEntity) != 0") //если БД пустая добавит элемент, если не пустая, то нет
-    fun doesItemsEntityExist(): Flow<Boolean>
+    fun doesItemsEntityExist(): Boolean
 
     @Query("SELECT * From ItemsEntity")
     fun getItemsEntities(): Flow<List<ItemsEntity>>

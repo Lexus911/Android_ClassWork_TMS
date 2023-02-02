@@ -33,6 +33,12 @@
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <provider
+            android:authorities="${applicationId}.androidx-startup"
+            android:name="androidx.startup.InitializationProvider"
+            tools:node="remove">
+        </provider>
     </application>
 
 </manifest>
