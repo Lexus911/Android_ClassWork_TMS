@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -15,6 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinApp"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.view.home.SecondActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".presentation.view.home.MainActivity"
             android:exported="true">
@@ -29,10 +34,12 @@
                 android:value="" />
         </activity>
 
-        <service android:name=".presentation.view.home.items.service.MusicPlayer"
+        <service
+            android:name=".presentation.view.home.items.service.MusicPlayer"
             android:enabled="true"
-            android:exported="true">
-        </service>
+            android:exported="true"></service>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

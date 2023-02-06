@@ -20,7 +20,10 @@
         tools:layout="@layout/fragment_items" >
         <action
             android:id="@+id/action_itemsFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"

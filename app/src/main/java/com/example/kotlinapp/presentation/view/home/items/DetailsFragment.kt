@@ -48,7 +48,9 @@ class DetailsFragment : Fragment() {
 
         val btn = view.findViewById<Button>(R.id.btn_logout)
         btn.setOnClickListener{
-            viewModel.logoutUser()
+
+            btn.isPressed = !it.isPressed
+//            viewModel.logoutUser()
         }
 
         viewModel.nav.observe(viewLifecycleOwner){

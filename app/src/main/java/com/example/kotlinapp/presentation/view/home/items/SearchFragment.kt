@@ -1,5 +1,8 @@
 package com.example.kotlinapp.presentation.view.home.items
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -8,8 +11,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.FragmentSearchBinding
 import com.example.kotlinapp.presentation.view.home.items.service.MusicPlayer
 import com.squareup.picasso.Picasso
@@ -36,9 +42,37 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //создание кнопки
+//        val btn = Button(context)
+//        btn.background = context?.getDrawable(R.drawable.avatar)
+//        btn.text = context?.getString(R.string.app_name)
+//        binding.root.addView(btn)
+
+        AnimationUtils.loadAnimation(context, R.anim.rotate_anim).also {
+            binding.btnStart.startAnimation(it)
+        }
+
         binding.btnStart.setOnClickListener{
+
             requireActivity().startForegroundService(Intent(requireContext(), MusicPlayer::class.java))
         }
+
+        val animatorSet = AnimatorSet()
+        val y = ObjectAnimator.ofFloat(binding.btnStart,"scaleY",2f,1f)
+        val x = ObjectAnimator.ofFloat(binding.btnStart,"scaleX",2f,1f)
+
+        animatorSet.playTogether(x,y)
+        animatorSet.start()
+
+        val translate = ValueAnimator.ofFloat(2f, 1.5f)
+        translate.addUpdateListener { animation ->
+            val scale = animation.animatedValue.toString().toFloat()
+            binding.btnStop.setScaleX(scale)
+            binding.btnStop.setScaleY(scale)
+        }
+        translate.repeatCount = 50
+        translate.start()
+
 
         binding.btnStop.setOnClickListener{
             requireActivity().stopService(Intent(requireContext(), MusicPlayer::class.java))

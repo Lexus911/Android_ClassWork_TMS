@@ -39,9 +39,9 @@ class ItemsViewHolder(private val view: View,
         }
 
         favorites.setOnClickListener{
+            favorites.isSelected = !it.isSelected
             itemsListener.onFavClicked(itemsModel.description)
         }
-
 
     }
 }
