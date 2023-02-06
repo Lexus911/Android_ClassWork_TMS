@@ -84,12 +84,10 @@ class ItemsFragment : Fragment(), ItemsListener {
 }
 
     override fun onClick() {
-
         viewModel.imageViewCLicked()
     }
 
     override fun onElementSelected(description: String, image: String) {
-
         viewModel.elementClicked(description, image)
     }
 

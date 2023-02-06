@@ -22,9 +22,6 @@ class ItemsViewModel @Inject constructor(
 //    private val _items = MutableLiveData<List<ItemsModel>>()
 //    val items: LiveData<List<ItemsModel>> = _items
 
-
-
-
     val items = flow<Flow<List<ItemsModel>>>{ emit(itemsInteractor.showData()) }
 
     private val _msg = MutableLiveData<Int>()
