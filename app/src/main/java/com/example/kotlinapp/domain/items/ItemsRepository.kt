@@ -14,7 +14,7 @@ interface ItemsRepository {
 
     suspend fun findItemByDescription(searchText: String): ItemsModel
 
-    suspend fun favClicked(itemsModel: ItemsModel)
+    suspend fun favClicked(itemsModel: ItemsModel, isFavorite: Boolean)
 
     suspend fun getFavorites(): List<FavoritesModel>
 }

@@ -113,8 +113,8 @@ class ItemsFragment : Fragment(), ItemsListener {
         viewModel.deleteItem(description)
     }
 
-    override fun onFavClicked(description: String) {
-        viewModel.onFavClicked(description)
+    override fun onFavClicked(description: String, isFavorite: Boolean) {
+        viewModel.onFavClicked(description, isFavorite)
     }
 
 

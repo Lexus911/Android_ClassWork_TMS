@@ -50,7 +50,7 @@ class ItemsRepositoryImpl @Inject constructor(
             val itemsEntity = itemsDAO.getItemsEntities()
             itemsEntity.map{ itemsList ->  //мапим флоу, доставая лист
                 itemsList.map{ item -> //мапим сам лист уже
-                ItemsModel(item.description, item.imageUrl)
+                ItemsModel(item.id, item.description, item.imageUrl, item.isFavorite ?: false)
                 }
             }
         }
@@ -65,18 +65,19 @@ class ItemsRepositoryImpl @Inject constructor(
     override suspend fun findItemByDescription(searchText: String): ItemsModel {
         return withContext(Dispatchers.IO) {
             val itemsEntity = itemsDAO.findItemEntityByDescription(searchText)
-            ItemsModel(itemsEntity.description, itemsEntity.imageUrl)
+            ItemsModel(itemsEntity.id, itemsEntity.description, itemsEntity.imageUrl, itemsEntity.isFavorite ?: false)
         }
     }
 
-    override suspend fun favClicked(itemsModel: ItemsModel) {
+    override suspend fun favClicked(itemsModel: ItemsModel, isFavorite: Boolean) {
         return withContext(Dispatchers.IO) {
             itemsDAO.insertFavoritesEntity(
                 FavoritesEntity(
-                Random().nextInt(),
+                itemsModel.id,
                 itemsModel.description,
                 itemsModel.image)
             )
+            itemsDAO.addToFavorite(itemsModel.description, isFavorite)
         }
     }
 

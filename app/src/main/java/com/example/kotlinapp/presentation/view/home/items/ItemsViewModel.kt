@@ -91,9 +91,9 @@ class ItemsViewModel @Inject constructor(
             itemsInteractor.deleteItemByDescription(description)
         }
 }
-    fun onFavClicked(description: String){
+    fun onFavClicked(description: String, isFavorite: Boolean){
         viewModelScope.launch {
-            itemsInteractor.onFavClicked(description)
+            itemsInteractor.onFavClicked(description, isFavorite)
         }
     }
 }
