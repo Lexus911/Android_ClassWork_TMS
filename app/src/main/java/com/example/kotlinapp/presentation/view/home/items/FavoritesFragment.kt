@@ -1,28 +1,26 @@
 package com.example.kotlinapp.presentation.view.home.items
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlinapp.R
+import com.example.kotlinapp.App
 import com.example.kotlinapp.databinding.FragmentFavoritesBinding
-import com.example.kotlinapp.databinding.FragmentSearchBinding
-import com.example.kotlinapp.presentation.adapter.ItemsAdapter
 import com.example.kotlinapp.presentation.view.home.items.adapter.FavoritesAdapter
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.kotlinapp.utils.BaseFragment
+import javax.inject.Inject
 
-@AndroidEntryPoint
-class FavoritesFragment : Fragment() {
 
+class FavoritesFragment : BaseFragment() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var favAdapter: FavoritesAdapter
-    private val viewModel: FavoritesViewModel by viewModels()
+    private val viewModel: FavoritesViewModel by viewModels{viewModelFactory}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +32,8 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity().applicationContext as App).provideAppComponent().inject(this)
+
 
         favAdapter = FavoritesAdapter()
 

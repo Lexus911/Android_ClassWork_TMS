@@ -1,32 +1,33 @@
 package com.example.kotlinapp.presentation.view.home.items
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlinapp.utils.BundleConstants
+import com.example.kotlinapp.App
 import com.example.kotlinapp.R
 import com.example.kotlinapp.presentation.adapter.ItemsAdapter
 import com.example.kotlinapp.presentation.adapter.listener.ItemsListener
+import com.example.kotlinapp.utils.BaseFragment
+import com.example.kotlinapp.utils.BundleConstants
 import com.example.kotlinapp.utils.NavHelper.navigateWithBundle
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
+import javax.inject.Inject
 
 // должна быть private, поэтому лучше в класс размещать или в компаньон обЪект, если надо использовать в другом фрагменте
 //const val NAME = "name"
 
-@AndroidEntryPoint
-class ItemsFragment : Fragment(), ItemsListener {
 
+class ItemsFragment : BaseFragment(), ItemsListener {
     private lateinit var itemsAdapter: ItemsAdapter
-    private val viewModel: ItemsViewModel by viewModels()
+    private val viewModel: ItemsViewModel by viewModels{viewModelFactory}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +38,7 @@ class ItemsFragment : Fragment(), ItemsListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity().applicationContext as App).provideAppComponent().inject(this)
 
         itemsAdapter = ItemsAdapter(this)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)

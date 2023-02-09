@@ -1,25 +1,29 @@
 package com.example.kotlinapp.presentation.view.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.kotlinapp.App
 import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.ActivityMainBinding
-import com.example.kotlinapp.presentation.view.home.MainActivityViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel: MainActivityViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: MainActivityViewModel by viewModels{viewModelFactory}
 
     lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
@@ -29,6 +33,8 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+
+        (applicationContext as App).provideAppComponent().inject(this)
 
         viewModel.checkUserExists()
 

@@ -1,7 +1,18 @@
 package com.example.kotlinapp
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import com.example.kotlinapp.di.AppModule
+import com.example.kotlinapp.di.component.AppComponent
 
-@HiltAndroidApp
-class App: Application()
+
+class App : Application(){
+    lateinit var appComponent: AppComponent
+
+    fun provideAppComponent(): AppComponent{
+       appComponent = DaggerAppComponent
+           .builder()
+           .appModule(AppModule(this))
+           .build()
+        return appComponent
+    }
+}

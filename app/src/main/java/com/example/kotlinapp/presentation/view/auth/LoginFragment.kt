@@ -1,19 +1,21 @@
 package com.example.kotlinapp.presentation.view.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.example.kotlinapp.App
 import com.example.kotlinapp.databinding.FragmentLoginBinding
+import com.example.kotlinapp.utils.BaseFragment
 import com.example.kotlinapp.utils.NavHelper.navigate
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
-@AndroidEntryPoint
-class LoginFragment : Fragment() {
-    private val viewModel: LoginViewModel by viewModels()
+class LoginFragment : BaseFragment() {
+    private val viewModel: LoginViewModel by viewModels{ viewModelFactory }
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
@@ -28,7 +30,9 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    binding.btnShowCreds.setOnClickListener{
+        (requireActivity().applicationContext as App).provideAppComponent().inject(this)
+
+        binding.btnShowCreds.setOnClickListener{
         viewModel.loginUser(
             binding.etText.text.toString(),
             binding.etText2.text.toString()

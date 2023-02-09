@@ -2,25 +2,21 @@ package com.example.kotlinapp.di
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import com.example.kotlinapp.data.service.ApiService
-import com.example.kotlinapp.data.service.ApiServiceSecond
 import com.example.kotlinapp.data.auth.AuthRepositoryImpl
 import com.example.kotlinapp.data.items.ItemsRepositoryImpl
+import com.example.kotlinapp.data.service.ApiService
+import com.example.kotlinapp.data.service.ApiServiceSecond
 import com.example.kotlinapp.data.sharedpref.SharedPreferencesHelper
 import com.example.kotlinapp.domain.auth.AuthRepository
 import com.example.kotlinapp.domain.items.ItemsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
 @Module
-@InstallIn(SingletonComponent::class)
 abstract class DataModule {
 
     @Binds
@@ -40,7 +36,7 @@ abstract class DataModule {
 
 
         @Provides
-        fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferencesHelper{
+        fun provideSharedPreferences(context: Context): SharedPreferencesHelper{
             return SharedPreferencesHelper(context.getSharedPreferences(SP_KEY, MODE_PRIVATE))
         }
 

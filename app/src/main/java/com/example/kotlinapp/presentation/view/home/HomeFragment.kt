@@ -2,23 +2,25 @@ package com.example.kotlinapp.presentation.view.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.example.kotlinapp.App
 import com.example.kotlinapp.databinding.FragmentHomeBinding
+import com.example.kotlinapp.utils.BaseFragment
 import com.example.kotlinapp.utils.NavHelper.replaceGraph
 import com.example.kotlinapp.utils.coroutines.CoroutinesExample
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
-@AndroidEntryPoint
-class HomeFragment : Fragment(){
+class HomeFragment : BaseFragment(){
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels{viewModelFactory}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,11 +28,13 @@ class HomeFragment : Fragment(){
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity().applicationContext as App).provideAppComponent().inject(this)
 
 //        lifecycleScope.launch (Dispatchers.IO){ //по умолчанию на main dispatcher
 //
