@@ -13,8 +13,7 @@ class AppModule(private val application: Application) {
     fun provideApplication():Application = this.application
 
     @Provides
-    fun provideContext( context: Context): Context{
-        return context
+    fun provideContext(): Context{
+        return this.application
     }
-
 }

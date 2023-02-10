@@ -24,11 +24,11 @@ import dagger.Component
 
 @ScreenScope
 interface AppComponent {
-    fun inject(loginFragment: LoginFragment)
-    fun inject(detailsFragment: DetailsFragment)
-    fun inject(itemsFragment: ItemsFragment)
-    fun inject(favoritesFragment: FavoritesFragment)
-    fun inject(searchFragment: SearchFragment)
-    fun inject(homeFragment: HomeFragment)
-    fun inject(mainActivity: MainActivity)
+    fun inject(fragment: LoginFragment)
+    fun inject(fragment: DetailsFragment)
+    fun inject(fragment: ItemsFragment)
+    fun inject(fragment: FavoritesFragment)
+    fun inject(fragment: SearchFragment)
+    fun inject(fragment: HomeFragment)
+    fun inject(activity: MainActivity)
 }
