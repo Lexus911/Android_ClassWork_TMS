@@ -3,10 +3,12 @@ package com.example.kotlinapp.presentation.view.home.items
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +22,18 @@ import com.example.kotlinapp.R
 import com.example.kotlinapp.databinding.FragmentSearchBinding
 import com.example.kotlinapp.presentation.view.home.items.service.MusicPlayer
 import com.example.kotlinapp.utils.BaseFragment
+import com.example.kotlinapp.utils.rx.RxJavaExample
 import com.squareup.picasso.Picasso
-import javax.inject.Inject
+import io.reactivex.Observable
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.annotations.SchedulerSupport.IO
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.Schedulers.io
+import io.reactivex.subjects.AsyncSubject
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.ReplaySubject
 
 
 class SearchFragment : BaseFragment() {
@@ -39,9 +51,27 @@ class SearchFragment : BaseFragment() {
         return binding.root
     }
 
+    @SuppressLint("CheckResult")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Вызов observable RxJava
+        RxJavaExample().observableJust1()
+        RxJavaExample().observableFlatMap()
+        RxJavaExample().observableZip()
+        RxJavaExample().observableConcat()
+        RxJavaExample().createObs(listOf<String>("IOS", "Android", "Flutter"))
+
+        //Вызов subjects RxJava
+        RxJavaExample().publishSubject()
+        RxJavaExample().replaySubject()
+        RxJavaExample().behaviorSubject()
+        RxJavaExample().asyncSubject()
+
+
+
+
         (requireActivity().applicationContext as App).provideAppComponent().inject(this)
         //создание кнопки
 //        val btn = Button(context)
