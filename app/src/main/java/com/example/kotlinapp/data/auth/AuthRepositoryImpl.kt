@@ -7,7 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(private val sharedPreferencesHelper: SharedPreferencesHelper): AuthRepository {
+class AuthRepositoryImpl @Inject constructor(
+    private val sharedPreferencesHelper: SharedPreferencesHelper
+    ): AuthRepository {
 
     override suspend fun loginUser(userName: String, userPassword: String) {
         withContext(Dispatchers.IO) { // меняем поток с MAIN на IO т.к. запрос в БД делается на IO потоке
