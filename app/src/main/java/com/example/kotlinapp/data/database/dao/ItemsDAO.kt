@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy.Companion.IGNORE
 import androidx.room.Query
 import com.example.kotlinapp.data.database.FavoritesEntity
 import com.example.kotlinapp.data.database.ItemsEntity
+import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 
 
@@ -16,10 +17,10 @@ interface ItemsDAO {
     fun insertItemsEntity(itemsEntity: ItemsEntity)
 
     @Query("SELECT(SELECT COUNT(*) From ItemsEntity) != 0") //если БД пустая добавит элемент, если не пустая, то нет
-    fun doesItemsEntityExist(): Flow<Boolean>
+    fun doesItemsEntityExist(): Observable<Boolean>
 
     @Query("SELECT * From ItemsEntity")
-    fun getItemsEntities(): Flow<List<ItemsEntity>>
+    fun getItemsEntities(): Observable<List<ItemsEntity>>
 
     @Query("DELETE FROM ItemsEntity WHERE description =:description")
     fun deleteItemEntityByDescription(description: String)

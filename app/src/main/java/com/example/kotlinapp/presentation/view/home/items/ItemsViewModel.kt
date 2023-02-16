@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kotlinapp.R
 import com.example.kotlinapp.domain.items.ItemsInteractor
 import com.example.kotlinapp.model.ItemsModel
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -18,14 +19,14 @@ class ItemsViewModel @Inject constructor(
     private val itemsInteractor: ItemsInteractor
 ): ViewModel() {
 
-//    private val _items = MutableLiveData<List<ItemsModel>>()
-//    val items: LiveData<List<ItemsModel>> = _items
+    private val _items = MutableLiveData<List<ItemsModel>>()
+    val items: LiveData<List<ItemsModel>> = _items
 
     private val _trigger = MutableLiveData<Flow<Unit>>()
     val trigger: LiveData<Flow<Unit>> = _trigger
 
 
-    val items = flow<Flow<List<ItemsModel>>>{ emit(itemsInteractor.showData()) }
+//    val items = flow<Flow<List<ItemsModel>>>{ emit(itemsInteractor.showData()) }
 
     //    1 способ
 //    val getData = flow{ emit(itemsInteractor.getData()) }
@@ -39,27 +40,22 @@ class ItemsViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-//    fun getData() {
-//        viewModelScope.launch {
-//            try {
-//                itemsInteractor.getData()
-//            }catch (e: Exception){
-//                _error.value = e.message.toString()
-//            }
-//        }
-//
-//
-////        viewModelScope.launch {
-////            try {
-////                val listItems = itemsInteractor.showData()
-////                listItems.collect{
-////                    _items.value = it
-////                }
-////            }catch (e: Exception){
-////                _error.value = e.message.toString() //обычно передаётся просто строка
-////            }
-////        }
-//    }
+    private val compositeDisposable = CompositeDisposable()
+
+    fun getData() {
+        val getData = itemsInteractor.getData().subscribe({
+
+        },{
+
+        })
+        compositeDisposable.add(getData)
+        val showData = itemsInteractor.showData().subscribe({
+            _items.value = it
+        },{
+            _error.value = "Error occurred when showing data"
+        })
+        compositeDisposable.add(showData)
+    }
 
         //2 способ
 //    fun getData(){
@@ -80,10 +76,10 @@ class ItemsViewModel @Inject constructor(
         _bundle.value = null
     }
 
-//    3 способ
-    suspend fun getDataSimple(){
-        itemsInteractor.getData()
-    }
+////    3 способ
+//    suspend fun getDataSimple(){
+//        itemsInteractor.getData()
+//    }
 
     fun deleteItem(description: String){
         viewModelScope.launch {
@@ -94,6 +90,11 @@ class ItemsViewModel @Inject constructor(
         viewModelScope.launch {
             itemsInteractor.onFavClicked(description)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 }
 

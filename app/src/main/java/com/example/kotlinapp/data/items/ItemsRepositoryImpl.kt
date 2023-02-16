@@ -10,14 +10,15 @@ import com.example.kotlinapp.data.service.ApiServiceSecond
 import com.example.kotlinapp.domain.items.ItemsRepository
 import com.example.kotlinapp.model.FavoritesModel
 import com.example.kotlinapp.model.ItemsModel
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
-
 
 
 class ItemsRepositoryImpl @Inject constructor(
@@ -27,33 +28,48 @@ class ItemsRepositoryImpl @Inject constructor(
 
     ): ItemsRepository {
 
-    override suspend fun getData() {
-         withContext(Dispatchers.IO) {
-            itemsDAO.doesItemsEntityExist().collect{
-            if(!it){
-                val response = apiService.getData()
-                Log.w("Data", response.body()?.sampleList.toString())
-                response.body()?.sampleList?.let {
-                    it.map {
-                        val itemsEntity =
-                            ItemsEntity(Random().nextInt(999-1), it.description, it.imageUrl)
-                        itemsDAO.insertItemsEntity(itemsEntity)
-                    }
+    private val compositeDisposable = CompositeDisposable()
+
+    override fun getData(): Completable {
+
+       return itemsDAO.doesItemsEntityExist()
+            .subscribeOn(Schedulers.io())
+            .doAfterNext{
+                if(!it){
+                    val response = apiService.getData()
+                    val getData = response.subscribeOn(Schedulers.io())
+                        .doAfterSuccess {
+                            it.sampleList.forEach {
+                                val itemsEntity =
+                                    ItemsEntity(Random().nextInt(999 - 1), it.description, it.imageUrl)
+                                itemsDAO.insertItemsEntity(itemsEntity)
+                            }
+                        }
+                        .doOnError {
+                            Log.w("error", "when making request")
+                        }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+                    compositeDisposable.add(getData)
                 }
             }
-        }
-    }
+           .doOnComplete{
+               compositeDisposable.dispose()
+           }
+           .ignoreElements()
+           .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override suspend fun showData(): Flow<List<ItemsModel>> {
-        return withContext(Dispatchers.IO) {
+
+    override fun showData(): io.reactivex.Observable<List<ItemsModel>> {
             val itemsEntity = itemsDAO.getItemsEntities()
-            itemsEntity.map{ itemsList ->  //мапим флоу, доставая лист
-                itemsList.map{ item -> //мапим сам лист уже
-                ItemsModel(item.description, item.imageUrl)
+       return itemsEntity.subscribeOn(Schedulers.io())
+            .map {
+                it.map {
+                    ItemsModel(it.description, it.imageUrl)
                 }
             }
-        }
+                    .observeOn(AndroidSchedulers.mainThread())
     }
 
     override suspend fun deleteItemByDescription(description: String) {
