@@ -38,16 +38,16 @@ class DetailsFragment : BaseFragment() {
         val detailsDate = view.findViewById<TextView>(R.id.detailsDate)
         val detailsImage = view.findViewById<ImageView>(R.id.detailsImage)
 
-        val bundle = arguments
-        bundle?.let { safeBundle ->
-
-            val description = safeBundle.getString("description")
-            val image = safeBundle.getString(IMAGE_VIEW)
-
-
-            detailsDate.text = description
-            Picasso.get().load(Uri.parse(image)).into(detailsImage)
-       }
+//        val bundle = arguments
+//        bundle?.let { safeBundle ->
+//
+//            val description = safeBundle.getString("description")
+//            val image = safeBundle.getString(IMAGE_VIEW)
+//
+//
+//            detailsDate.text = description
+//            Picasso.get().load(Uri.parse(image)).into(detailsImage)
+//       }
 
         val btn = view.findViewById<Button>(R.id.btn_logout)
         btn.setOnClickListener{
