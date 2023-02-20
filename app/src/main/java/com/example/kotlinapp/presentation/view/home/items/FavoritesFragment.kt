@@ -1,10 +1,20 @@
 package com.example.kotlinapp.presentation.view.home.items
 
+import android.Manifest
+import android.content.Context.LOCATION_SERVICE
+import android.content.pm.PackageManager
+import android.location.LocationListener
+import android.location.LocationManager
+import android.location.LocationManager.GPS_PROVIDER
+import android.location.LocationManager.NETWORK_PROVIDER
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,5 +56,36 @@ class FavoritesFragment : Fragment() {
         viewModel.favorites.observe(viewLifecycleOwner){
             favAdapter.submitList(it)
         }
+
+
+        //Локация
+        var locationManager: LocationManager? = null
+        locationManager = requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager?
+
+        try{
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            locationManager?.requestLocationUpdates(
+                GPS_PROVIDER,
+                0L,
+                0.0f,
+                locationListener
+            )
+        }catch(e: Exception){
+            Log.w("error", "while accessing location")
+        }
+    }
+
+    private val locationListener = LocationListener{
+        Toast.makeText(requireContext(),"long: ${it.longitude} lat: ${it.latitude}", Toast.LENGTH_SHORT).show()
+
     }
 }
