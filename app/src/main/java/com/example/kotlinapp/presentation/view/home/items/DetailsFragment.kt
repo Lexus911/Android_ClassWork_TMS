@@ -44,7 +44,6 @@ class DetailsFragment : BaseFragment() {
 //            val description = safeBundle.getString("description")
 //            val image = safeBundle.getString(IMAGE_VIEW)
 //
-//
 //            detailsDate.text = description
 //            Picasso.get().load(Uri.parse(image)).into(detailsImage)
 //       }

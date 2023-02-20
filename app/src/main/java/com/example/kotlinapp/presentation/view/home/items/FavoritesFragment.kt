@@ -1,5 +1,7 @@
 package com.example.kotlinapp.presentation.view.home.items
 
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinapp.App
 import com.example.kotlinapp.databinding.FragmentFavoritesBinding
+import com.example.kotlinapp.presentation.receiver.AirplaneModeChangeReceiver
+import com.example.kotlinapp.presentation.receiver.MyBroadcastReceiver
 import com.example.kotlinapp.presentation.view.home.items.adapter.FavoritesAdapter
 import com.example.kotlinapp.utils.BaseFragment
 import javax.inject.Inject
@@ -32,7 +36,19 @@ class FavoritesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         (requireActivity().applicationContext as App).provideAppComponent().inject(this)
+
+        val receiver = AirplaneModeChangeReceiver()
+        IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
+            requireContext().registerReceiver(receiver, it)
+        }
+
+        val receiver2 = MyBroadcastReceiver()
+        IntentFilter("MY_ACTION").also {
+            requireContext().registerReceiver(receiver2, it)
+        }
+        setMessage()
 
 
         favAdapter = FavoritesAdapter()
@@ -47,4 +63,10 @@ class FavoritesFragment : BaseFragment() {
             favAdapter.submitList(it)
         }
     }
+    private fun setMessage(){
+        val intent = Intent("MY_ACTION")
+        intent.putExtra("KEY", "message")
+        requireContext().sendBroadcast(intent)
+    }
+
 }

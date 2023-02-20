@@ -5,8 +5,8 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
+import android.os.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,6 +95,63 @@ class SearchFragment : BaseFragment() {
             binding.tvDescription.text = it.description
             Picasso.get().load(Uri.parse(it.image)).into(binding.ivSearch)
         }
+
+        runHandler()
     }
+
+
+    private fun runHandler(){
+        var backgroundHandler: Handler? = null
+
+        //Creating a background thread.
+        val backgroundThread = Thread {
+            //Creating a Looper for this thread.
+            Looper.prepare()
+
+            //Looper.myLooper() gives you Looper for current Thread.
+            val myLooper = Looper.myLooper()!!
+
+            //Creating a Handler for given Looper object.
+            backgroundHandler = Handler(myLooper) { msg ->
+
+                //Processing incoming messages for this Handler.
+                //Receiving extras from Message
+                val bundle: Bundle? = msg.data
+
+                Log.d("", "Handler:: Extras: ${bundle}")
+
+                Log.d("", "Handler:: Background Thread ID ${Thread.currentThread().id}")
+
+                //myLooper.quit()
+                true
+            }
+
+            Looper.loop()
+        }
+        backgroundThread.start()
+
+
+        //Click listener on a Button
+        binding.customButton.setOnClickListener {
+            Log.d("", "Handler:: UI Thread ID ${Thread.currentThread().id}")
+
+            //Executing code on backgroundThread using Handler.
+            backgroundHandler!!.post {
+                //Here, you'll note that Thread's ID is of backgroundThread.
+                Log.d("", "Handler:: Background Thread ID ${Thread.currentThread().id}")
+            }
+
+            // Now, sending data on backgroundThread using Message object. Handler's handleMessage(msg: Message?) method will receive this Message and perform appropriate action.
+            val extras = Bundle()
+            extras.putInt("PRICE", 100)
+            extras.putString("PRODUCT_NAME", "Table Lamp")
+
+            val message = Message.obtain(backgroundHandler)
+            message.data = extras
+
+            backgroundHandler?.sendMessage(message)
+        }
+    }
+
 
 }
