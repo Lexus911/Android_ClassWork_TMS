@@ -44,14 +44,13 @@ class ItemsRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun showData(): Flow<List<ItemsModel>> {
+    override suspend fun showData(): List<ItemsModel> {
         return withContext(Dispatchers.IO) {
             val itemsEntity = itemsDAO.getItemsEntities()
-            itemsEntity.map{ itemsList ->  //мапим флоу, доставая лист
-                itemsList.map{ item -> //мапим сам лист уже
+            itemsEntity.map { item -> //мапим сам лист уже
                 ItemsModel(item.description, item.imageUrl)
-                }
             }
+
         }
     }
 

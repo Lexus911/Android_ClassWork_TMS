@@ -19,10 +19,8 @@ class ItemsViewModel @Inject constructor(
     private val itemsInteractor: ItemsInteractor
 ): ViewModel() {
 
-//    private val _items = MutableLiveData<List<ItemsModel>>()
-//    val items: LiveData<List<ItemsModel>> = _items
-
-    val items = flow<Flow<List<ItemsModel>>>{ emit(itemsInteractor.showData()) }
+    private val _items = MutableLiveData<List<ItemsModel>>()
+    val items: LiveData<List<ItemsModel>> = _items
 
     private val _msg = MutableLiveData<Int>()
     val msg: LiveData<Int> = _msg
@@ -33,44 +31,51 @@ class ItemsViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-////        viewModelScope.launch {
-////            try {
-////                val listItems = itemsInteractor.showData()
-////                listItems.collect{
-////                    _items.value = it
-////                }
-////            }catch (e: Exception){
-////                _error.value = e.message.toString() //обычно передаётся просто строка
-////            }
-////        }
-//    }
 
 
-
-    fun imageViewCLicked(){
-        _msg.value = R.string.imageview_clicked
-    }
-
-    fun elementClicked(description: String, image: String){
-        _bundle.value = NavigateWithBundle(description, image, destinationId = R.id.action_itemsFragment_to_detailsFragment)
-    }
-
-    fun userNavigated(){
-        _bundle.value = null
-    }
-
-
-    fun deleteItem(description: String){
+    fun showData() {
         viewModelScope.launch {
-            itemsInteractor.deleteItemByDescription(description)
-        }
-}
-    fun onFavClicked(description: String){
-        viewModelScope.launch {
-            itemsInteractor.onFavClicked(description)
+            try {
+                itemsInteractor.getData()
+                _items.value = itemsInteractor.showData()
+            } catch (e: Exception) {
+                _error.value = e.message.toString() //обычно передаётся просто строка
+            }
         }
     }
-}
+
+
+
+        fun imageViewCLicked() {
+            _msg.value = R.string.imageview_clicked
+        }
+
+        fun elementClicked(description: String, image: String) {
+            _bundle.value = NavigateWithBundle(
+                description,
+                image,
+                destinationId = R.id.action_itemsFragment_to_detailsFragment
+            )
+        }
+
+        fun userNavigated() {
+            _bundle.value = null
+        }
+
+
+        fun deleteItem(description: String) {
+            viewModelScope.launch {
+                itemsInteractor.deleteItemByDescription(description)
+            }
+        }
+
+        fun onFavClicked(description: String) {
+            viewModelScope.launch {
+                itemsInteractor.onFavClicked(description)
+            }
+        }
+    }
+
 
 data class NavigateWithBundle(
     val description: String,

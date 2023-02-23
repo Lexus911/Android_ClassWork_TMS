@@ -19,7 +19,7 @@ interface ItemsDAO {
     fun doesItemsEntityExist(): Boolean
 
     @Query("SELECT * From ItemsEntity")
-    fun getItemsEntities(): Flow<List<ItemsEntity>>
+    fun getItemsEntities(): List<ItemsEntity>
 
     @Query("DELETE FROM ItemsEntity WHERE description =:description")
     fun deleteItemEntityByDescription(description: String)
